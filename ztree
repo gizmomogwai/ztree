@@ -1,0 +1,12 @@
+#!/bin/bash -x
+if [ $# -ne 2 ]; then
+  echo "Usage $0 dir1 dir2"
+  exit 1
+fi
+os=$(uname)
+args="-nw -q --load $HOME/.ztreediff/init.el"
+if [ $os == "Darwin" ]; then
+  /Applications/Emacs.app/Contents/MacOS/Emacs $args --eval "(ztree-diff \"$1\" \"$2\")"
+else
+  emacs $args  --eval "(ztree-diff \"$1\" \"$2\")"
+fi
